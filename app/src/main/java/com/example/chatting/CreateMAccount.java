@@ -7,7 +7,9 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -32,6 +34,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class CreateMAccount extends AppCompatActivity {
     EditText name, location, email, password, contact;
@@ -71,11 +74,11 @@ public class CreateMAccount extends AppCompatActivity {
             resources = context.getResources();
             createaccount.setText(resources.getString(R.string.account1));
             details.setText(resources.getString(R.string.details));
-            name.setText(resources.getString(R.string.name1));
-            location.setText(resources.getString(R.string.location));
-            email.setText(resources.getString(R.string.email1));
-            password.setText(resources.getString(R.string.password1));
-            contact.setText(resources.getString(R.string.number));
+            name.setHint(resources.getString(R.string.name1));
+            location.setHint(resources.getString(R.string.location));
+            email.setHint(resources.getString(R.string.email1));
+            password.setHint(resources.getString(R.string.password1));
+            contact.setHint(resources.getString(R.string.number));
             btn.setText(resources.getString(R.string.savedetails));
 
 
@@ -94,11 +97,11 @@ public class CreateMAccount extends AppCompatActivity {
             resources = context.getResources();
             createaccount.setText(resources.getString(R.string.account1));
             details.setText(resources.getString(R.string.details));
-            name.setText(resources.getString(R.string.name1));
-            location.setText(resources.getString(R.string.location));
-            email.setText(resources.getString(R.string.email1));
-            password.setText(resources.getString(R.string.password1));
-            contact.setText(resources.getString(R.string.number));
+            name.setHint(resources.getString(R.string.name1));
+            location.setHint(resources.getString(R.string.location));
+            email.setHint(resources.getString(R.string.email1));
+            password.setHint(resources.getString(R.string.password1));
+            contact.setHint(resources.getString(R.string.number));
             btn.setText(resources.getString(R.string.savedetails));
 
             str="اردو";
@@ -108,7 +111,10 @@ public class CreateMAccount extends AppCompatActivity {
 
 
     }
-
+    boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
     public void SaveDetails(View view) {
         db = dbHelper.getWritableDatabase();
         String Name = name.getText().toString();
@@ -117,9 +123,32 @@ public class CreateMAccount extends AppCompatActivity {
         String Password = password.getText().toString();
         String ContactNumber = contact.getText().toString();
 
+        String MobilePattern = "[0-9]{11}";
+        final Pattern Password_Pattern=
+                Pattern.compile("^"+
+                        "(?=.*[0-9])"+ //ATLEAST ONE DIGIT
+                        "(?=.*[a-z])" + //ATLEAST ON LOWERCASE LETTER
+                        "(?=.*[A-Z])" + //ATLEAST ONE UPPERCASE LETTER
+                        "(?=.*[@#$%^&+=])" + //ATLEAST ONE SPECIAL CHARACTER
+                        ".{6,}"+ //ATLEAST 6 CHARACTERS
+                        "$");
+
         if (Name.equals("") || Location.equals("") || Email.equals("") || Password.equals("") || ContactNumber.equals("")) {
             Toast.makeText(this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if (isEmail(email) == false) {
+            email.setError("Invalid email");
+        }
+        else if (!Password_Pattern.matcher(Password).matches())
+        {
+
+            password.setError("password too Weak\n Use atleast one digit\n one uppercase letter\n one small case letter\n one sepcial charater\n atleast 6 charaters");
+        }
+        else if(!contact.getText().toString().matches(MobilePattern)) {
+            contact.setError("Please enter valid 11 digit phone number");
+        }
+
+        else {
 
 if(check.equals("MilkMan"))
 {
@@ -196,6 +225,13 @@ if(check.equals("MilkMan"))
         }
 
 
+    }
+    public static boolean isValidPassword(String s) {
+        Pattern PASSWORD_PATTERN
+                = Pattern.compile(
+                "[a-zA-Z0-9\\!\\@\\#\\$]{8,24}");
+
+        return !TextUtils.isEmpty(s) && PASSWORD_PATTERN.matcher(s).matches();
     }
 }
 

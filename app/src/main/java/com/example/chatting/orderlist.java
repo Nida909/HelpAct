@@ -54,11 +54,17 @@ public class orderlist extends AppCompatActivity {
                 for(DataSnapshot h1: snapshot.getChildren()) {
                 //history1 h1=snapshot1.getValue(history1.class);
                     //count++;
+                    String checkride=h1.child("GivenRide").getValue().toString();
+                    Toast.makeText(orderlist.this,"You  Country "+checkride, Toast.LENGTH_LONG).show();
+                    if(checkride.equals("No"))
+                    {
+
+
                 history1 mObj = new history1( ""+h1.child("CustomerContact").getValue(),""+h1.child("MilkmanLoc").getValue() ,   ""+h1.child("CustomerName").getValue() , ""+h1.child("DropOffLoc").getValue());
                     count=Integer.parseInt(h1.child("ID").getValue().toString());
                 mObj.setCount(count);
                 customer.add(mObj);
-
+                    }
 
                 }
                 if(!customer.isEmpty())

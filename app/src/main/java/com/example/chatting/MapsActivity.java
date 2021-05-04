@@ -232,6 +232,7 @@ ref.child("check").setValue(b);
         data.put("CustomerName",s1);
         data.put("CustomerContact",s2);
         data.put("Cancel","Unknown");
+        data.put("GivenRide","No");
         //data.put("Cancel","Unknown");
         reff.child("Orderlocation").child(count).setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

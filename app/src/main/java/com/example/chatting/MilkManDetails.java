@@ -3,8 +3,10 @@ package com.example.chatting;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +17,7 @@ public class MilkManDetails extends AppCompatActivity {
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
     String str,str2,s1,s2,s3,s4,s5,s6;
-
+Button reviews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,7 @@ public class MilkManDetails extends AppCompatActivity {
         str2=intent.getStringExtra("val2");//customer id
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
+        reviews=(Button)findViewById(R.id.review);
         t1=(TextView)findViewById(R.id.txt1);
         t2=(TextView)findViewById(R.id.txt2);
         t3=(TextView)findViewById(R.id.txt3);
@@ -46,7 +49,7 @@ public class MilkManDetails extends AppCompatActivity {
         s4=c.getString(3);
         long qnt=c.getLong(4);
         long prc=c.getLong(5);
-        db.close();
+
         s5=String.valueOf(qnt);
         s6=String.valueOf(prc);
         t1.setText(s1);
@@ -55,6 +58,17 @@ t3.setText(s3);
 t4.setText(s4);
 t5.setText(s5);
 t6.setText(s6);
+       String[] values={str2,str};
+        Cursor cr=db.query(DatabaseContract.OrderT.TABLE_NAME,null,"PlacedBy=? AND PlacedTo=?",values,null,null,null);
+        if (cr.getCount() > 0) {
+        }
+        else
+        {
+            //reviews.isClickable();
+            reviews.setClickable(false);
+            reviews.setBackgroundColor(Color.GRAY);
+        }
+        db.close();
     }
     public void onplace(View v)
     {

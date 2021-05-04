@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -105,6 +107,27 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main2, menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.Help:
 
+                Intent inten = new Intent(MainActivity2.this, HelpActivity.class);
+                //inten.putExtra("var", str);
+                startActivity(inten);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+        }
+    }
 
 }

@@ -343,7 +343,8 @@ protected void onPause()
     public void ConfirmRide(View v)
     {
         //String name;
-
+        ref=database.getReference();
+        ref.child("Orderlocation").child( Rcount).child("GivenRide").setValue("Yes");
         ref=database.getReference().child("Rider").child( Rcount);
             Map<String, Object> data = new HashMap<>();
             data.put("Name", name);

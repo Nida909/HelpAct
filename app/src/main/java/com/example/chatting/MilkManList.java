@@ -150,6 +150,12 @@ ImageButton img;
 
 
         }
+        public void nearest(View v)
+        {
+            Intent intent = new Intent(MilkManList.this, SearchNearest.class);
+            intent.putExtra("val",  str);
+            startActivity(intent);
+        }
 
 
    /* public void Onsearch(View v)

@@ -452,7 +452,7 @@ i.putExtra("Price",price);
                 p1=Double.parseDouble(price);
                 p2=p1-pp;
                 String[] wherearg={milkmanId};
-
+/*
                 String[] columns = { DatabaseContract.MilkMan.COL_TOTAL_PRICE};
                 Cursor c = db.query(DatabaseContract.MilkMan.TABLE_NAME, columns, DatabaseContract.MilkMan._ID + "=?", wherearg
                         , null, null, null, null);
@@ -468,9 +468,11 @@ i.putExtra("Price",price);
                 if (count > 0) {
                     Toast.makeText(this, count+"  Records updated: " , Toast.LENGTH_SHORT).show();
                 }
+
+ */
                 String[] wherearg2={RiderId};
                 String[] column = { DatabaseContract.Riders.COL_TOTAL_PRICE};
-                Cursor cr = db.query(DatabaseContract.Riders.TABLE_NAME, column, DatabaseContract.Riders._ID + "=?", wherearg2
+              /*  Cursor cr = db.query(DatabaseContract.Riders.TABLE_NAME, column, DatabaseContract.Riders._ID + "=?", wherearg2
                         , null, null, null, null);
                 if (cr.getCount() > 0) {
                     cr.moveToFirst();
@@ -492,7 +494,7 @@ i.putExtra("Price",price);
                     Toast.makeText(this, cont+"  Records updated: " , Toast.LENGTH_SHORT).show();
                 }
                 db.close();
-
+*/
                 ref.child("Orderlocation").child(Count).child("Cancel").setValue("Successfull");
                 Intent intn=new Intent(MapsActivity3.this,MilkManList.class);
                 startActivity(intn);

@@ -12,12 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chatting"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OwnerMain"></activity>
+        <activity android:name=".SearchNearest"></activity>
+        <activity android:name=".OwnerMain" />
+        <activity android:name=".CantFindNearestMilkMan" />
+        <activity android:name=".ChatBoxNotWorking" />
+        <activity android:name=".LogIn" />
+        <activity android:name=".HelpActivity" />
         <activity android:name=".RiderAdapter" />
         <activity
             android:name=".MapsActivity3"
             android:label="Map"
-            android:uiOptions="splitActionBarWhenNarrow"/>
+            android:uiOptions="splitActionBarWhenNarrow" />
         <activity android:name=".orderlist" />
 
         <service
@@ -68,7 +73,7 @@
         <activity android:name=".CustomerLists" />
         <activity android:name=".CustomerList1" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".PaymentActivity" />
         <activity android:name=".SetupProfileActivity" />
         <activity
             android:name=".OTP"
